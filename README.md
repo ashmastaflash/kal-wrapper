@@ -45,11 +45,12 @@ And what you get for scanning a band:
   'power': '780303.16',
   'sample_rate': '270833.002142'}]
 
+```
 
 Channel scan results:
 
 
-::
+```
   [{'band': 'GSM-850',
   'channel': '232',
   'device': '0: Generic RTL2832U OEM',
