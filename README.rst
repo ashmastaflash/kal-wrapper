@@ -1,11 +1,12 @@
-# kal-wrapper
-## Python wrapper for Kalibrate.
+**kalibrate**
+*Python wrapper for Kalibrate.*
+
 Returns scan data in structured format.
 
 
 Example usage:
 
-```
+::
 import kalibrate
 scanner = kalibrate.Kal("/usr/local/bin/kal")
 # Scan a band
@@ -14,11 +15,9 @@ band_results = scanner.scan_band("GSM850", gain=45)
 channel_results = scanner.scan_channel("232", gain=45)
 
 
-```
-
 And what you get for scanning a band:
 
-```
+::
 [{'band': 'GSM-850',
   'base_freq': 869200000.0,
   'channel': '128',
@@ -846,4 +845,3 @@ Channel scan results:
   'iteration': '100',
   'offset': '22221.34',
   'sample_rate': '270833.002142'}]
-```
