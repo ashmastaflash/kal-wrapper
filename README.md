@@ -6,6 +6,8 @@ Python wrapper for Kalibrate.
 
 ![travis](https://travis-ci.org/ashmastaflash/kal-wrapper.svg?branch=master)
 
+![coveralls](https://coveralls.io/github/ashmastaflash/kal-wrapper?branch=master)
+
 Returns scan data in structured format.
 
 
