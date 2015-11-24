@@ -4,6 +4,7 @@ kalibrate
 Python wrapper for Kalibrate.
 -----------------------------
 
+![travis](https://travis-ci.org/ashmastaflash/kal-wrapper.svg?branch=master)
 
 Returns scan data in structured format.
 
