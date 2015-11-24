@@ -6,7 +6,7 @@ python:
 install:
   - "python setup.py install"
 
-script: "py.test ."
+script: "py.test --cov=kalibrate test"
 
 after_success:
   -coveralls
