@@ -48,7 +48,7 @@ def determine_final_freq(base, direction, modifier):
     return(result)
 
 def to_eng(num_in):
-    x = decimal.Decimal(num_in)
+    x = decimal.Decimal(str(num_in))
     eng_not = x.normalize().to_eng_string()
     return(eng_not)
 
