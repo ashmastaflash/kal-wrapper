@@ -5,6 +5,7 @@ python:
 
 install:
   - "pip install pytest-cov"
+  - "pip install pytest-pep8"
   - "pip install python-coveralls"
   - "python setup.py install"
 
