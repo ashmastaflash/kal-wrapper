@@ -3,6 +3,7 @@ import fn
 import sanity
 import subprocess
 
+
 class Kal:
     """A valid file is required here- the path to
     the kal binary.  Oftentimes located at /usr/bin/kal

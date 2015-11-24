@@ -1,6 +1,8 @@
 from kalibrate import sanity
 
+
 class TestSanity:
+
     def test_gsm850(self):
         assert sanity.scan_band_is_valid("GSM850")
 

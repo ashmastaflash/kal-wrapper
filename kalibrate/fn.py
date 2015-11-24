@@ -1,10 +1,11 @@
 import decimal
 import sanity
 
+
 def build_kal_scan_band_string(kal_bin, band, args):
     option_mapping = {"gain": "-g",
                       "device": "-d",
-                      "error" : "-e"}
+                      "error": "-e"}
     if not sanity.scan_band_is_valid(band):
         err_txt = "Unsupported band designation: %" % band
         raise ValueError(err_txt)
@@ -14,30 +15,33 @@ def build_kal_scan_band_string(kal_bin, band, args):
             base_string += str(" %s %s" % (flag, str(args[option])))
     return(base_string)
 
+
 def build_kal_scan_channel_string(kal_bin, channel, args):
     option_mapping = {"gain": "-g",
                       "device": "-d",
-                      "error" : "-e"}
+                      "error": "-e"}
     base_string = "%s -v -c %s" % (kal_bin, channel)
     for option, flag in option_mapping.items():
         if option in args:
             base_string += str(" %s %s" % (flag, str(args[option])))
     return(base_string)
 
+
 def herz_me(val):
     result = 0
     if val.endswith("MHz"):
-        stripped = val.replace("MHz","")
+        stripped = val.replace("MHz", "")
         strip_fl = float(stripped)
         result = strip_fl * 1000000
     elif val.endswith("kHz"):
-        stripped = val.replace("kHz","")
+        stripped = val.replace("kHz", "")
         strip_fl = float(stripped)
         result = strip_fl * 1000
     elif val.endswith("Hz"):
-        stripped = val.replace("Hz","")
+        stripped = val.replace("Hz", "")
         result = float(stripped)
     return(result)
+
 
 def determine_final_freq(base, direction, modifier):
     result = 0
@@ -47,10 +51,12 @@ def determine_final_freq(base, direction, modifier):
         result = base - modifier
     return(result)
 
+
 def to_eng(num_in):
     x = decimal.Decimal(str(num_in))
     eng_not = x.normalize().to_eng_string()
     return(eng_not)
+
 
 def determine_scan_band(kal_out):
     band = ""
@@ -58,19 +64,21 @@ def determine_scan_band(kal_out):
         for line in kal_out.splitlines():
             if "kal: Scanning for " in line:
                 band = line.split()[3]
-        if band =="":
+        if band == "":
             band = None
     return band
+
 
 def determine_device(kal_out):
     device = ""
     while device == "":
         for line in kal_out.splitlines():
             if "Using device " in line:
-                device = str(line.split(' ',2)[-1])
+                device = str(line.split(' ', 2)[-1])
         if device == "":
             device = None
     return device
+
 
 def determine_scan_gain(kal_out):
     gain = ""
@@ -82,6 +90,7 @@ def determine_scan_gain(kal_out):
             gain = None
     return gain
 
+
 def determine_sample_rate(kal_out):
     sample_rate = ""
     while sample_rate == "":
@@ -91,6 +100,7 @@ def determine_sample_rate(kal_out):
         if sample_rate == "":
             sample_rate = None
     return sample_rate
+
 
 def determine_chan_detect_threshold(kal_out):
     channel_detect_threshold = ""
@@ -103,6 +113,7 @@ def determine_chan_detect_threshold(kal_out):
             channel_detect_threshold = None
     return channel_detect_threshold
 
+
 def determine_band_channel(kal_out):
     band = ""
     channel = ""
@@ -112,10 +123,12 @@ def determine_band_channel(kal_out):
             if "Using " in line and " channel " in line:
                 band = str(line.split()[1])
                 channel = str(line.split()[3])
-                tgt_freq = str(line.split()[4]).replace("(","").replace(")","")
+                tgt_freq = str(line.split()[4]).replace(
+                    "(", "").replace(")", "")
         if band == "":
             band = None
     return(band, channel, tgt_freq)
+
 
 def parse_kal_scan(kal_out):
     kal_data = []
@@ -130,8 +143,8 @@ def parse_kal_scan(kal_out):
             chan = str(p_line[1])
             modifier = str(p_line[3])
             power = str(p_line[5])
-            mod_raw = str(p_line[4]).replace(')\tpower:','')
-            base_raw = str((p_line[2]).replace('(',''))
+            mod_raw = str(p_line[4]).replace(')\tpower:', '')
+            base_raw = str((p_line[2]).replace('(', ''))
             mod_freq = herz_me(mod_raw)
             base_freq = herz_me(base_raw)
             final_freq = to_eng(determine_final_freq(base_freq, modifier,
@@ -149,6 +162,7 @@ def parse_kal_scan(kal_out):
                        "channel_detect_threshold": chan_detect_threshold}
             kal_data.append(kal_run.copy())
     return kal_data
+
 
 def parse_kal_channel(kal_out):
     kal_data = []

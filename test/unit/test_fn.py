@@ -132,7 +132,9 @@ not found: 25499
 average absolute error: -33.445 ppm
 """
 
+
 class TestFn:
+
     def test_build_kal_scan_band_string_noargs(self):
         band = "GSM900"
         kal_bin = "/usr/bin/kal"
