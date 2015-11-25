@@ -7,7 +7,7 @@ def read(file_name):
     return filestring
 
 setup(name = "kalibrate",
-      version = "1.0",
+      version = "1.1",
       author = "Ash Wilson",
       author_email = "ash.d.wilson@gmail.com",
       description = "A python wrapper for kalibrate-rtl",

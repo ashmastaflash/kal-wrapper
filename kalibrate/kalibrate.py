@@ -15,7 +15,7 @@ class Kal:
         self.kal_bin = kal_bin
         if not os.path.isfile(kal_bin):
             errno = 69
-            err_txt = "Kal binary not at location specified: %" % kal_bin
+            err_txt = "Kal binary not at location specified: %s" % kal_bin
             raise IOError(errno, err_txt)
 
     def scan_band(self, band, **kwargs):
