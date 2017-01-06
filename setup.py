@@ -7,7 +7,7 @@ def read(file_name):
     return filestring
 
 setup(name = "kalibrate",
-      version = "1.1.1",
+      version = "1.1.2",
       author = "Ash Wilson",
       author_email = "ash.d.wilson@gmail.com",
       description = "A python wrapper for kalibrate-rtl",
@@ -15,4 +15,4 @@ setup(name = "kalibrate",
       keywords = "kalibrate kal rtl-sdr sdr",
       url = "https://github.com/ashmastaflash/kal-wrapper",
       packages = ["kalibrate", "test"],
-      long_description = read("README.md"))
+      long_description = read("README.rst"))
