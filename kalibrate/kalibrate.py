@@ -1,6 +1,5 @@
 import os
 import fn
-import sanity
 import subprocess
 
 
