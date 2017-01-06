@@ -63,14 +63,11 @@ def to_eng(num_in):
 
 
 def determine_scan_band(kal_out):
-    band = ""
-    while band == "":
-        for line in kal_out.splitlines():
-            if "kal: Scanning for " in line:
-                band = line.split()[3]
-        if band == "":
-            band = None
-    return band
+    derived = extract_value_from_output(" Scanning for ", -3, kal_out)
+    if derived is None:
+        return "NotFound"
+    else:
+        return derived
 
 
 def determine_device(kal_out):
