@@ -11,6 +11,7 @@ Returns scan data in structured format.
 Example usage:
 
 ::
+
   import kalibrate
   scanner = kalibrate.Kal("/usr/local/bin/kal")
   # Scan a band
@@ -22,6 +23,7 @@ Example usage:
 And what you get for scanning a band:
 
 ::
+
   [{'band': 'GSM-850',
   'base_freq': 869200000.0,
   'channel': '128',
@@ -50,6 +52,7 @@ Channel scan results:
 
 
 ::
+
   [{'band': 'GSM-850',
   'channel': '232',
   'device': '0: Generic RTL2832U OEM',
