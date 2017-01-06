@@ -2,6 +2,14 @@ import decimal
 import sanity
 
 
+def options_string_builder(option_mapping, args):
+    options_string = ""
+    for option, flag in option_mapping.items():
+        if option in args:
+            options_string += str(" %s %s" % (flag, str(args[option])))
+    return options_string
+
+
 def build_kal_scan_band_string(kal_bin, band, args):
     option_mapping = {"gain": "-g",
                       "device": "-d",
@@ -10,9 +18,7 @@ def build_kal_scan_band_string(kal_bin, band, args):
         err_txt = "Unsupported band designation: %" % band
         raise ValueError(err_txt)
     base_string = "%s -v -s %s" % (kal_bin, band)
-    for option, flag in option_mapping.items():
-        if option in args:
-            base_string += str(" %s %s" % (flag, str(args[option])))
+    base_string += options_string_builder(option_mapping, args)
     return(base_string)
 
 
@@ -21,9 +27,7 @@ def build_kal_scan_channel_string(kal_bin, channel, args):
                       "device": "-d",
                       "error": "-e"}
     base_string = "%s -v -c %s" % (kal_bin, channel)
-    for option, flag in option_mapping.items():
-        if option in args:
-            base_string += str(" %s %s" % (flag, str(args[option])))
+    base_string += options_string_builder(option_mapping, args)
     return(base_string)
 
 
@@ -81,25 +85,22 @@ def determine_device(kal_out):
 
 
 def determine_scan_gain(kal_out):
-    gain = ""
-    while gain == "":
-        for line in kal_out.splitlines():
-            if "Setting gain: " in line:
-                gain = str(line.split()[2])
-        if gain == "":
-            gain = None
-    return gain
+    return(extract_value_from_output("Setting gain: ", 2, kal_out))
 
 
 def determine_sample_rate(kal_out):
-    sample_rate = ""
-    while sample_rate == "":
+    return(extract_value_from_output("Exact sample rate", -2, kal_out))
+
+
+def extract_value_from_output(canary, split_offset, kal_out):
+    retval = ""
+    while retval == "":
         for line in kal_out.splitlines():
-            if "Exact sample rate" in line:
-                sample_rate = str(line.split()[-2])
-        if sample_rate == "":
-            sample_rate = None
-    return sample_rate
+            if canary in line:
+                retval = str(line.split()[split_offset])
+        if retval == "":
+            retval = None
+    return retval
 
 
 def determine_chan_detect_threshold(kal_out):
@@ -109,7 +110,7 @@ def determine_chan_detect_threshold(kal_out):
             if "channel detect threshold: " in line:
                 channel_detect_threshold = str(line.split()[-1])
         if channel_detect_threshold == "":
-            print "Unable to parse sample rate"
+            print("Unable to parse sample rate")
             channel_detect_threshold = None
     return channel_detect_threshold
 
