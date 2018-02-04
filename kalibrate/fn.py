@@ -3,6 +3,7 @@ import sanity
 
 
 def options_string_builder(option_mapping, args):
+    """Return arguments for CLI invocation of kal."""
     options_string = ""
     for option, flag in option_mapping.items():
         if option in args:
@@ -11,6 +12,7 @@ def options_string_builder(option_mapping, args):
 
 
 def build_kal_scan_band_string(kal_bin, band, args):
+    """Return string for CLI invocation of kal, for band scan."""
     option_mapping = {"gain": "-g",
                       "device": "-d",
                       "error": "-e"}
@@ -23,6 +25,7 @@ def build_kal_scan_band_string(kal_bin, band, args):
 
 
 def build_kal_scan_channel_string(kal_bin, channel, args):
+    """Return string for CLI invocation of kal, for channel scan."""
     option_mapping = {"gain": "-g",
                       "device": "-d",
                       "error": "-e"}
@@ -32,6 +35,7 @@ def build_kal_scan_channel_string(kal_bin, channel, args):
 
 
 def herz_me(val):
+    """Return integer value for Hz, translated from (MHz|kHz|Hz)."""
     result = 0
     if val.endswith("MHz"):
         stripped = val.replace("MHz", "")
@@ -48,6 +52,7 @@ def herz_me(val):
 
 
 def determine_final_freq(base, direction, modifier):
+    """Return integer for frequency."""
     result = 0
     if direction == "+":
         result = base + modifier
@@ -57,12 +62,14 @@ def determine_final_freq(base, direction, modifier):
 
 
 def to_eng(num_in):
+    """Return number in engineering notation."""
     x = decimal.Decimal(str(num_in))
     eng_not = x.normalize().to_eng_string()
     return(eng_not)
 
 
 def determine_scan_band(kal_out):
+    """Return band for scan results."""
     derived = extract_value_from_output(" Scanning for ", -3, kal_out)
     if derived is None:
         return "NotFound"
@@ -71,6 +78,7 @@ def determine_scan_band(kal_out):
 
 
 def determine_device(kal_out):
+    """Extract and return device from scan results."""
     device = ""
     while device == "":
         for line in kal_out.splitlines():
@@ -82,14 +90,23 @@ def determine_device(kal_out):
 
 
 def determine_scan_gain(kal_out):
+    """Return gain from scan results."""
     return(extract_value_from_output("Setting gain: ", 2, kal_out))
 
 
 def determine_sample_rate(kal_out):
+    """Return sample rate from scan results."""
     return(extract_value_from_output("Exact sample rate", -2, kal_out))
 
 
 def extract_value_from_output(canary, split_offset, kal_out):
+    """Return value parsed from output.
+
+    Args:
+        canary(str): This string must exist in the target line.
+        split_offset(int): Split offset for target value in string.
+        kal_out(int): Output from kal.
+    """
     retval = ""
     while retval == "":
         for line in kal_out.splitlines():
@@ -101,6 +118,7 @@ def extract_value_from_output(canary, split_offset, kal_out):
 
 
 def determine_chan_detect_threshold(kal_out):
+    """Return channel detect threshold from kal output."""
     channel_detect_threshold = ""
     while channel_detect_threshold == "":
         for line in kal_out.splitlines():
@@ -113,6 +131,7 @@ def determine_chan_detect_threshold(kal_out):
 
 
 def determine_band_channel(kal_out):
+    """Return band, channel, target frequency from kal output."""
     band = ""
     channel = ""
     tgt_freq = ""
@@ -129,6 +148,7 @@ def determine_band_channel(kal_out):
 
 
 def parse_kal_scan(kal_out):
+    """Parse kal band scan output."""
     kal_data = []
     scan_band = determine_scan_band(kal_out)
     scan_gain = determine_scan_gain(kal_out)
@@ -163,6 +183,7 @@ def parse_kal_scan(kal_out):
 
 
 def parse_kal_channel(kal_out):
+    """Parse kal channel scan output."""
     kal_data = []
     scan_gain = determine_scan_gain(kal_out)
     scan_device = determine_device(kal_out)
