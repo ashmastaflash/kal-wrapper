@@ -134,7 +134,6 @@ average absolute error: -33.445 ppm
 
 
 class TestFn:
-
     def test_build_kal_scan_band_string_noargs(self):
         band = "GSM900"
         kal_bin = "/usr/bin/kal"
@@ -201,6 +200,7 @@ class TestFn:
         control_iteration = "1"
         control_sample_rate = "270833.002142"
         control_gain = "45.0"
+        avg_absolute_error = "-33.445"
         kal_normalized = fn.parse_kal_channel(kal_freq_offset_sample)
         assert kal_normalized[0]["offset"] == control_offset
         assert kal_normalized[0]["channel"] == control_channel
@@ -210,3 +210,4 @@ class TestFn:
         assert kal_normalized[0]["gain"] == control_gain
         assert kal_normalized[0]["band"] == control_band
         assert kal_normalized[0]["frequency"] == control_frequency
+        assert kal_normalized[0]["avg_absolute_error"] == avg_absolute_error

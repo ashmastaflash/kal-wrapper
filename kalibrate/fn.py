@@ -117,6 +117,12 @@ def extract_value_from_output(canary, split_offset, kal_out):
     return retval
 
 
+def determine_avg_absolute_error(kal_out):
+    """Return average absolute error from kal output."""
+    return extract_value_from_output("average absolute error: ",
+                                     -2, kal_out)
+
+
 def determine_chan_detect_threshold(kal_out):
     """Return channel detect threshold from kal output."""
     channel_detect_threshold = ""
@@ -189,6 +195,7 @@ def parse_kal_channel(kal_out):
     scan_device = determine_device(kal_out)
     sample_rate = determine_sample_rate(kal_out)
     scan_band, scan_channel, tgt_freq = determine_band_channel(kal_out)
+    avg_absolute_error = determine_avg_absolute_error(kal_out)
     for line in kal_out.splitlines():
         if "offset " in line:
             p_line = line.split(' ')
@@ -201,6 +208,7 @@ def parse_kal_channel(kal_out):
                            "gain": scan_gain,
                            "band": scan_band,
                            "channel": scan_channel,
-                           "frequency": tgt_freq}
+                           "frequency": tgt_freq,
+                           "avg_absolute_error": avg_absolute_error}
             kal_data.append(measurement.copy())
     return kal_data
