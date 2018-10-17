@@ -202,12 +202,13 @@ class TestFn:
         control_gain = "45.0"
         avg_absolute_error = "-33.445"
         kal_normalized = fn.parse_kal_channel(kal_freq_offset_sample)
-        assert kal_normalized[0]["offset"] == control_offset
-        assert kal_normalized[0]["channel"] == control_channel
-        assert kal_normalized[0]["device"] == control_device
-        assert kal_normalized[0]["iteration"] == control_iteration
-        assert kal_normalized[0]["sample_rate"] == control_sample_rate
-        assert kal_normalized[0]["gain"] == control_gain
-        assert kal_normalized[0]["band"] == control_band
-        assert kal_normalized[0]["frequency"] == control_frequency
-        assert kal_normalized[0]["avg_absolute_error"] == avg_absolute_error
+        assert len(kal_normalized["measurements"]) == 100
+        assert kal_normalized["channel"] == control_channel
+        assert kal_normalized["device"] == control_device
+        assert kal_normalized["sample_rate"] == control_sample_rate
+        assert kal_normalized["gain"] == control_gain
+        assert kal_normalized["band"] == control_band
+        assert kal_normalized["frequency"] == control_frequency
+        assert kal_normalized["avg_absolute_error"] == avg_absolute_error
+        assert kal_normalized["measurements"][0] == control_offset
+        assert kal_normalized["raw_scan_result"] == kal_freq_offset_sample

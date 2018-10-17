@@ -190,25 +190,23 @@ def parse_kal_scan(kal_out):
 
 def parse_kal_channel(kal_out):
     """Parse kal channel scan output."""
-    kal_data = []
-    scan_gain = determine_scan_gain(kal_out)
-    scan_device = determine_device(kal_out)
-    sample_rate = determine_sample_rate(kal_out)
     scan_band, scan_channel, tgt_freq = determine_band_channel(kal_out)
-    avg_absolute_error = determine_avg_absolute_error(kal_out)
+    kal_data = {"device": determine_device(kal_out),
+                "sample_rate": determine_sample_rate(kal_out),
+                "gain": determine_scan_gain(kal_out),
+                "band": scan_band,
+                "channel": scan_channel,
+                "frequency": tgt_freq,
+                "avg_absolute_error": determine_avg_absolute_error(kal_out),
+                "measurements" : get_measurements_from_kal_scan(kal_out),
+                "raw_scan_result": kal_out}
+    return kal_data
+
+def get_measurements_from_kal_scan(kal_out):
+    """Return a list of all measurements from kalibrate channel scan."""
+    result = []
     for line in kal_out.splitlines():
         if "offset " in line:
             p_line = line.split(' ')
-            iteration = str(p_line[-2]).split(':')[0]
-            offset = p_line[-1]
-            measurement = {"iteration": iteration,
-                           "offset": offset,
-                           "device": scan_device,
-                           "sample_rate": sample_rate,
-                           "gain": scan_gain,
-                           "band": scan_band,
-                           "channel": scan_channel,
-                           "frequency": tgt_freq,
-                           "avg_absolute_error": avg_absolute_error}
-            kal_data.append(measurement.copy())
-    return kal_data
+            result.append(p_line[-1])
+    return result
