@@ -1,4 +1,5 @@
 import os
+import re
 from setuptools import setup
 
 def read(file_name):
@@ -6,13 +7,22 @@ def read(file_name):
         filestring = f.read()
     return filestring
 
+def get_version():
+    raw_init_file = read("kalibrate/__init__.py")
+    rx_compiled = re.compile(r"\s*__version__\s*=\s*\"(\S+)\"")
+    ver = rx_compiled.search(raw_init_file).group(1)
+    return ver
+
+def build_long_desc():
+    return "\n".join([read(f) for f in ["README.rst", "CHANGELOG.rst"]])
+
 setup(name = "kalibrate",
-      version = "1.1.2",
+      version = get_version(),
       author = "Ash Wilson",
       author_email = "ash.d.wilson@gmail.com",
       description = "A python wrapper for kalibrate-rtl",
       license = "BSD",
       keywords = "kalibrate kal rtl-sdr sdr",
       url = "https://github.com/ashmastaflash/kal-wrapper",
-      packages = ["kalibrate", "test"],
-      long_description = read("README.rst"))
+      packages = ["kalibrate"],
+      long_description = build_long_desc)
