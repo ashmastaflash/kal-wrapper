@@ -1,14 +1,17 @@
 language: python
 python:
-- '2.6'
 - '2.7'
 install:
 - pip install pytest-cov
 - pip install pytest-pep8
-- pip install python-coveralls
-- python setup.py install
-script: py.test test/unit/ --doctest-modules -v --cov kalibrate --cov-report term-missing
-after_success: -coveralls
+- pip install -e .
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+script:
+- "./cc-test-reporter before-build"
+- py.test -v --cov kalibrate --cov-report term-missing --cov-report xml test/
+- "./cc-test-reporter after-build"
 deploy:
   provider: pypi
   user: ashmastaflash
@@ -17,3 +20,6 @@ deploy:
   on:
     tags: true
     repo: ashmastaflash/kal-wrapper
+env:
+  global:
+    secure: Q1PlHaW/lYvoXAtT4JEAzqNQXN9y784ci32IymAlhhinRmsNCjV+FjHYX5Lb6xyz4CGJpD74sni0BkekIfO09NW0jlvix9PC0SwTRzsMv24bnQKTjGOunh2jjWO2EZiY7vHbTJL8X8De85MYIBkn+b/DH9n1JN8+IWF3RB4/EXSu2yjlkIby89yfV3Mco09AbEEqUOVS2IBrA+s4NmyD0mWI8r5Vcmoz0EN4Z13GTdruVleLYbowWjE+pcVK6x9ZxaNfaPhYj24KnFf/DRo0wtasK16pT6tOR+rF8h6tKVMSyH2kH+zHQt1pKdK/o9nwBo8CV4+CVtlgQvh/QA/9By1bur7/SEOQaCFPIPgyE7DwATZS4u/fxOMwGb0UOPlFPS2cP9rLwxITX1vGay+buvH3UPUd8O6Gkg9GPsqyR7FPQPRTX3sSpSyL0OV6//qjrzKHX6gm64TuxosieURWsojpke9JhYFedwJ8jTCo/o4rfooXEcBVJBS1n7C8tovEb313Go58KKYw2awW0CugcruQZCBDHunD2E+19NQDI9kGic/gC/0Tx+iqX6lPSp+xUa7OPVOTbnohUgXmp1Gy5IW3Z4r4wybdrwBIlgYJoqkQdMKmer+9PX9d+lHTNoQvpgIyKLBtQKcIejSGaLtjvDK6mLxrEG3ZWNri4+Q/F24=
