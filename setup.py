@@ -25,4 +25,4 @@ setup(name = "kalibrate",
       keywords = "kalibrate kal rtl-sdr sdr",
       url = "https://github.com/ashmastaflash/kal-wrapper",
       packages = ["kalibrate"],
-      long_description = build_long_desc)
+      long_description = build_long_desc())
