@@ -25,4 +25,15 @@ setup(name = "kalibrate",
       keywords = "kalibrate kal rtl-sdr sdr",
       url = "https://github.com/ashmastaflash/kal-wrapper",
       packages = ["kalibrate"],
-      long_description = build_long_desc())
+      long_description = build_long_desc(),
+      classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Operating System :: MacOS :: MacOS X",
+        "Operating System :: POSIX :: Linux",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Topic :: Security",
+        "License :: OSI Approved :: BSD License"
+        ],)
