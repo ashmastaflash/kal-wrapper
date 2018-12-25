@@ -1,8 +1,20 @@
 =========
 kalibrate
 =========
+
 Python wrapper for Kalibrate.
 -----------------------------
+
+.. image:: https://travis-ci.org/ashmastaflash/kal-wrapper.svg?branch=master
+    :target: https://travis-ci.org/ashmastaflash/kal-wrapper
+
+.. image:: https://api.codeclimate.com/v1/badges/8a598e64e8ed55a21645/maintainability
+   :target: https://codeclimate.com/github/ashmastaflash/kal-wrapper/maintainability
+   :alt: Maintainability
+
+.. image:: https://api.codeclimate.com/v1/badges/8a598e64e8ed55a21645/test_coverage
+   :target: https://codeclimate.com/github/ashmastaflash/kal-wrapper/test_coverage
+   :alt: Test Coverage
 
 
 Returns scan data in structured format.
