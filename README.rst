@@ -64,18 +64,19 @@ Channel scan results:
 
 ::
 
-{'device': '0: Generic RTL2832U OEM',
-'channel': '232',
-'band': 'GSM-850',
-'gain': '45.0',
-'sample_rate': '270833.002142',
-'frequency': '890MHz',
-'average_absolute_error': '-33.445',
-'measurements':
-['29921.37',
-'29952.37',
-'29900.71'],
-'raw_scan_result': 'ORIGINAL FULL SCAN BODY GOES HERE'}
+  {'device': '0: Generic RTL2832U OEM',
+  'channel': '232',
+  'band': 'GSM-850',
+  'gain': '45.0',
+  'sample_rate': '270833.002142',
+  'frequency': '890MHz',
+  'average_absolute_error': '-33.445',
+  'measurements':
+  ['29921.37',
+  '29952.37',
+  '29900.71'],
+  'raw_scan_result': 'ORIGINAL FULL SCAN BODY GOES HERE'}
+
 
 Note: Kalibrate's output for this feature starts numbering with offset 1. This
 abstraction starts at 0, because that's how Python numbers things. So you'll
