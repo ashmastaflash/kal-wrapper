@@ -1,9 +1,9 @@
+from . import fn
 import os
-import fn
 import subprocess
 
 
-class Kal:
+class Kal(object):
     """A valid file is required here- the path to
     the kal binary.  Oftentimes located at /usr/bin/kal
 

@@ -1,8 +1,20 @@
 =========
 kalibrate
 =========
+
 Python wrapper for Kalibrate.
 -----------------------------
+
+.. image:: https://travis-ci.org/ashmastaflash/kal-wrapper.svg?branch=master
+    :target: https://travis-ci.org/ashmastaflash/kal-wrapper
+
+.. image:: https://api.codeclimate.com/v1/badges/8a598e64e8ed55a21645/maintainability
+   :target: https://codeclimate.com/github/ashmastaflash/kal-wrapper/maintainability
+   :alt: Maintainability
+
+.. image:: https://api.codeclimate.com/v1/badges/8a598e64e8ed55a21645/test_coverage
+   :target: https://codeclimate.com/github/ashmastaflash/kal-wrapper/test_coverage
+   :alt: Test Coverage
 
 
 Returns scan data in structured format.
@@ -52,18 +64,19 @@ Channel scan results:
 
 ::
 
-{"device": "0: Generic RTL2832U OEM",
- "channel": "232",
- "band": "GSM-850",
- "gain": "45.0",
- "sample_rate": "270833.002142",
- "frequency": "890MHz",
- "average_absolute_error": "-33.445",
- "measurements":
-    ["29921.37",
-     "29952.37",
-     "29900.71"],
- "raw_scan_result": "ORIGINAL FULL SCAN BODY GOES HERE"}
+  {'device': '0: Generic RTL2832U OEM',
+  'channel': '232',
+  'band': 'GSM-850',
+  'gain': '45.0',
+  'sample_rate': '270833.002142',
+  'frequency': '890MHz',
+  'average_absolute_error': '-33.445',
+  'measurements':
+  ['29921.37',
+  '29952.37',
+  '29900.71'],
+  'raw_scan_result': 'ORIGINAL FULL SCAN BODY GOES HERE'}
+
 
 Note: Kalibrate's output for this feature starts numbering with offset 1. This
 abstraction starts at 0, because that's how Python numbers things. So you'll

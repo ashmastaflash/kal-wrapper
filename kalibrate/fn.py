@@ -1,5 +1,6 @@
+from . import sanity
 import decimal
-import sanity
+
 
 
 def options_string_builder(option_mapping, args):
