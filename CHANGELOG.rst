@@ -1,5 +1,18 @@
-v2.0
-----
+v2.1.0
+------
+
+Changes
+~~~~~~~
+- Adding build, coverage, and quality badges to README.rst. [Ash Wilson]
+- Python 3.6, 3.7 compatibility. [Ash Wilson]
+
+Other
+~~~~~
+- Create pyup.io config file. [pyup-bot]
+
+
+v2.0 (2018-10-17)
+-----------------
 
 Changes
 ~~~~~~~
