@@ -1,6 +1,8 @@
+"""Test functions."""
+import pprint
 from kalibrate import fn
 
-kal_scan_sample = """Found 1 device(s):
+kal_scan_sample = b"""Found 1 device(s):
   0:  Generic RTL2832U OEM
 
 Using device 0: Generic RTL2832U OEM
@@ -16,7 +18,7 @@ GSM-850:
 
 """
 
-kal_freq_offset_sample = """Found 1 device(s):
+kal_freq_offset_sample = b"""Found 1 device(s):
   0:  Generic RTL2832U OEM
 
 Using device 0: Generic RTL2832U OEM
@@ -180,6 +182,7 @@ class TestFn:
         control_cdt = "261365.030729"
         control_device = "0: Generic RTL2832U OEM"
         kal_normalized = fn.parse_kal_scan(kal_scan_sample)
+        pprint.pprint(kal_normalized)
         assert kal_normalized[0]["channel"] == control_channel
         assert kal_normalized[0]["base_freq"] == control_base_freq
         assert kal_normalized[0]["mod_freq"] == control_mod_freq
